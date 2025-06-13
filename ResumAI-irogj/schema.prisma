@@ -1,0 +1,37 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+    id       Int       @id @default(autoincrement())
+    username String    @unique
+    password String
+    resumes  Resume[]
+    credits  Int       @default(3)
+    payments Payment[]
+}
+
+model Resume {
+    id             Int      @id @default(autoincrement())
+    fileName       String
+    filePath       String
+    processedPath  String?
+    jobUrl         String?
+    structuredData String?
+    createdAt      DateTime @default(now())
+    user           User     @relation(fields: [userId], references: [id])
+    userId         Int
+}
+
+model Payment {
+    id     Int      @id @default(autoincrement())
+    amount Float
+    date   DateTime @default(now())
+    user   User     @relation(fields: [userId], references: [id])
+    userId Int
+}

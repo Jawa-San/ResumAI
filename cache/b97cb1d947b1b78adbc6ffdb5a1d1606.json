@@ -1,0 +1,251 @@
+{
+  "original": {
+    "personal_info": {
+      "name": "Joshua Singh",
+      "email": "joshuassingh7@gmail.com",
+      "phone": "",
+      "linkedin": "https://linkedin.com/in/JoshSSingh",
+      "website": "https://jawa-san.github.io/Portfolio/",
+      "github": "https://github.com/Jawa-San",
+      "location": "Orlando, FL"
+    },
+    "summary": "",
+    "skills": [
+      "YAML",
+      "Java",
+      "Low-code Platforms",
+      "Airtable",
+      "Zapier",
+      "SDVI (or similar)",
+      "ETL Pipelines",
+      "Decision Engines",
+      "Process Optimization",
+      "Collaboration",
+      "Innovation",
+      "Industry Alignment"
+    ],
+    "experience": [
+      {
+        "title": "AI Workflow Automation Developer",
+        "company": "L&S Logistic Services",
+        "location": "Orlando, FL",
+        "dates": "Mar. 2024 - Oct. 2024",
+        "bullets": [
+          "Built low-code automation tools to streamline warehouse and delivery workflows, reducing manual data entry and improving overall logistics efficiency.",
+          "Used Python and YAML to develop AI-powered systems that automatically processed shipping data, flagged delivery issues, and routed items based on location and urgency.",
+          "Integrated with tools like Airtable and Zapier to visualize workflows and make operations easier for non-technical staff to manage and modify.",
+          "Worked closely with logistics managers to identify pain points and deploy AI workflows that automated routine tasks such as inventory updates and shipment tracking."
+        ]
+      },
+      {
+        "title": "Research Assistant",
+        "company": "University of Central Florida, Prof. Boloni\u2019s Lab",
+        "location": "Orlando, FL",
+        "dates": "2023",
+        "bullets": [
+          "Built automated workflows to streamline data collection and analysis for research on AI-driven content detection.",
+          "Created low-code tools to help researchers visualize model outputs and manage datasets without needing advanced programming skills.",
+          "Designed decision-making flows that integrated machine learning predictions into study pipelines, improving research efficiency and reproducibility.",
+          "Documented all processes to support collaboration and enable future researchers to reuse and build on existing workflows."
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "name": "AI Resume Optimization Platform",
+        "description": "Built a SaaS platform that analyzes job postings and optimizes resumes using OpenAI API, automatically matching candidate skills with job requirements and suggesting targeted improvements.",
+        "bullets": [
+          "Developed PDF parsing and text extraction capabilities to process uploaded resumes, creating structured data for AI-driven analysis and keyword optimization.",
+          "Implemented job posting scraper and NLP pipeline to extract key requirements, qualifications, and preferences from company career pages and job boards.",
+          "Created responsive web interface with real-time feedback system, enabling users to iteratively refine their resumes based on ATS compatibility scores and industry-specific recommendations."
+        ],
+        "technologies": [
+          "Python",
+          "OpenAI API",
+          "React",
+          "PostgreSQL",
+          "PDF Parsing"
+        ],
+        "url": "",
+        "dates": ""
+      },
+      {
+        "name": "AI Video Generation Platform for Social Media",
+        "description": "Developed a SaaS application that transforms PDFs and text prompts into engaging TikTok/Instagram videos using AI-generated voiceovers and animated character dialogues.",
+        "bullets": [
+          "Integrated OpenAI API for content summarization and script generation, automatically converting study materials into digestible video segments optimized for social media consumption.",
+          "Built custom video rendering pipeline using FFmpeg and Python to synchronize AI-generated audio with character animations, supporting multiple content formats and aspect ratios.",
+          "Implemented user dashboard for content management and video customization, allowing creators to generate educational content featuring popular animated characters discussing user-specified topics."
+        ],
+        "technologies": [
+          "Python",
+          "OpenAI API",
+          "FFmpeg",
+          "React",
+          "Text-to-Speech"
+        ],
+        "url": "",
+        "dates": ""
+      },
+      {
+        "name": "Custom AI Chatbot Builder for Small Businesses",
+        "description": "Created a SaaS platform enabling small businesses to deploy custom AI chatbots trained on their website content, product information, and business-specific knowledge bases.",
+        "bullets": [
+          "Developed web scraping and content ingestion system to automatically extract and structure business information, creating vector embeddings for contextual customer support responses.",
+          "Integrated OpenAI API with retrieval-augmented generation (RAG) to ensure chatbot responses are accurate, relevant, and aligned with business policies and offerings.",
+          "Built embeddable widget system with customizable UI components, allowing seamless integration into existing websites with minimal technical setup required."
+        ],
+        "technologies": [
+          "Python",
+          "OpenAI API",
+          "JavaScript",
+          "Web Scraping",
+          "Embeddings"
+        ],
+        "url": "",
+        "dates": ""
+      }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor\u2019s Degree in Computer Science and Minor in Computational Mathematics and Health Sciences",
+        "school": "University of Central Florida",
+        "location": "",
+        "date": "Graduated May 2024",
+        "gpa": "",
+        "honors": "Received Florida Academic Scholars Bright Futures Scholarship offered to students for 4.0 GPA",
+        "relevant_courses": []
+      }
+    ],
+    "certifications": [],
+    "awards": [],
+    "languages": [],
+    "volunteer": []
+  },
+  "optimized": {
+    "personal_info": {
+      "name": "Joshua Singh",
+      "email": "joshuassingh7@gmail.com",
+      "phone": "",
+      "linkedin": "https://linkedin.com/in/JoshSSingh",
+      "website": "https://jawa-san.github.io/Portfolio/",
+      "github": "https://github.com/Jawa-San",
+      "location": "Orlando, FL"
+    },
+    "summary": "Dedicated IT Support Specialist and Web Administrator with extensive experience in managing web infrastructure, ensuring security, optimization, and seamless performance of websites. Proficient in WordPress administration, cloud services, and backend management, with a strong focus on enhancing user experience and operational efficiency. Adept at troubleshooting technical issues, implementing security protocols, and collaborating with teams to optimize digital assets.",
+    "skills": [
+      "WordPress Administration",
+      "Server Management (AWS, cPanel)",
+      "Cybersecurity Protocols",
+      "HTML, CSS, JavaScript",
+      "Database Management (MySQL, PostgreSQL)",
+      "SEO Optimization",
+      "Website Performance Monitoring",
+      "Automated Monitoring Tools",
+      "API Integrations",
+      "Collaboration",
+      "Process Optimization",
+      "Low-code Platforms (Zapier, Airtable)"
+    ],
+    "experience": [
+      {
+        "title": "AI Workflow Automation Developer",
+        "company": "L&S Logistic Services",
+        "location": "Orlando, FL",
+        "dates": "Mar. 2024 - Oct. 2024",
+        "bullets": [
+          "Managed and optimized digital workflows with low-code automation tools to enhance logistics operations, ensuring high performance and minimal downtime.",
+          "Leveraged Python and YAML to develop responsive IT solutions that processed shipping data in real-time and improved decision-making processes.",
+          "Integrated various tools like Airtable and Zapier to improve team collaboration and facilitate user-friendly workflow management without extensive technical knowledge.",
+          "Collaborated with logistics managers to identify operational challenges and deploy automation workflows that enabled quick returns to efficient inventory management and shipment tracking."
+        ]
+      },
+      {
+        "title": "Research Assistant",
+        "company": "University of Central Florida, Prof. Boloni\u2019s Lab",
+        "location": "Orlando, FL",
+        "dates": "2023",
+        "bullets": [
+          "Developed and maintained automated systems for data collection and analysis on AI-driven projects, enhancing efficiency in data workflows.",
+          "Created low-code tools for effectively visualizing outcomes and managing datasets, ensuring ease of use for research teams without advanced programming expertise.",
+          "Designed decision-making flows that smoothly integrated machine learning predictions, optimizing the research process for scalability and repeatability.",
+          "Maintained comprehensive documentation of technical workflows, supporting ongoing collaboration and future scalability for new research efforts."
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "name": "AI Resume Optimization Platform",
+        "description": "Developed a SaaS platform utilizing OpenAI API to optimize resumes by aligning candidate skills with job requirements and offering tailored suggestions for enhancements.",
+        "bullets": [
+          "Engineered PDF parsing and structured text extraction features to enhance resume processing and facilitate efficient AI-driven analysis.",
+          "Created job posting scrapers and NLP pipelines that extract essential recruitment specifics, optimizing the candidate matching process.",
+          "Designed an interactive web interface delivering instant feedback to users, aiding in quick iterations of resumes to align with industry-specific demands."
+        ],
+        "technologies": [
+          "Python",
+          "OpenAI API",
+          "React",
+          "PostgreSQL",
+          "PDF Parsing"
+        ],
+        "url": "",
+        "dates": ""
+      },
+      {
+        "name": "AI Video Generation Platform for Social Media",
+        "description": "Developed a dynamic SaaS application that turns text prompts and PDFs into engaging social media content with AI-generated elements.",
+        "bullets": [
+          "Integrated OpenAI API to streamline content summarization, making educational videos engaging and accessible for diverse audiences.",
+          "Constructed a robust video rendering pipeline synchronizing AI audio outputs with animated sequences tailored for social sharing.",
+          "Implemented a user-friendly dashboard for managing content, permitting flexible customization and seamless publication to multiple platforms."
+        ],
+        "technologies": [
+          "Python",
+          "OpenAI API",
+          "FFmpeg",
+          "React",
+          "Text-to-Speech"
+        ],
+        "url": "",
+        "dates": ""
+      },
+      {
+        "name": "Custom AI Chatbot Builder for Small Businesses",
+        "description": "Developed a SaaS platform that allows small businesses to deploy tailored AI chatbots informed by specific corporate content to enhance customer engagement.",
+        "bullets": [
+          "Built a comprehensive content ingestion system that efficiently extracts vital business data to generate meaningful customer support interactions.",
+          "Utilized OpenAI API with RAG for precision in responses, ensuring alignment with business guidelines and knowledge bases.",
+          "Established a customizable widget framework to facilitate easy integration into client websites, minimizing technical barriers for implementation."
+        ],
+        "technologies": [
+          "Python",
+          "OpenAI API",
+          "JavaScript",
+          "Web Scraping",
+          "Embeddings"
+        ],
+        "url": "",
+        "dates": ""
+      }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor\u2019s Degree in Computer Science and Minor in Computational Mathematics and Health Sciences",
+        "school": "University of Central Florida",
+        "location": "",
+        "date": "Graduated May 2024",
+        "gpa": "",
+        "honors": "Received Florida Academic Scholars Bright Futures Scholarship offered to students for 4.0 GPA",
+        "relevant_courses": []
+      }
+    ],
+    "certifications": [],
+    "awards": [],
+    "languages": [],
+    "volunteer": []
+  },
+  "job_description": "Global-5 is a full-service advertising, public relations and marketing firm based in Longwood, FL, with nearly 30 years of experience in transportation, construction, automotive, government, and emerging technologies. We specialize in designing, launching, and maintaining successful public relations and marketing programs that engage target audiences and achieve clients' goals. Our services include public relations, marketing, creative, digital, and strategic consulting.Role DescriptionGlobal-5 is seeking a Web Administrator & IT Support Specialist to manage our web infrastructure, ensuring seamless performance, security, and scalability. This full-time, on-site role focuses on website administration, server management, cybersecurity, and IT support, ensuring all digital assets and systems remain operational and optimized.The ideal candidate will be responsible for maintaining company websites, overseeing hosting environments, managing cloud and on-premise servers, implementing securit",
+  "job_url": "https://www.linkedin.com/jobs/view/4238532961/?alternateChannel=search&refId=nsKkj0bBzaxVu4D2CaWtCw%3D%3D&trackingId=vMwKBvFgBputuq2D2mqK2w%3D%3D",
+  "creativity_level": 1.0
+}

@@ -1,0 +1,42 @@
+{
+  "personal_info": {
+    "name": "Functional Resume Sample",
+    "email": "jwsmith@colostate.edu",
+    "phone": "",
+    "linkedin": ""
+  },
+  "summary": "Four years experience in early childhood development with a di verse background in the care of special needs children and adults.",
+  "skills": [],
+  "experience": [
+    {
+      "title": "1999",
+      "company": "2002  Counseling Supervisor, The Wesley Ce nter, Little Rock, Arkansas.",
+      "dates": "",
+      "bullets": []
+    },
+    {
+      "title": "1997",
+      "company": "1999  Client Specialist, Rainbow Special Ca re Center, Little Rock, Arkansas",
+      "dates": "",
+      "bullets": []
+    },
+    {
+      "title": "1996",
+      "company": "1997 Teacher\u2019s Assistant, Cowell Elem entary, Conway, Arkansas",
+      "dates": "",
+      "bullets": []
+    }
+  ],
+  "education": [
+    {
+      "degree": "\u2022 BS in Early Childhood Development (1999)",
+      "school": "",
+      "date": "1999"
+    },
+    {
+      "degree": "\u2022 BA in Elementary Education (1998)",
+      "school": "",
+      "date": "1998"
+    }
+  ]
+}

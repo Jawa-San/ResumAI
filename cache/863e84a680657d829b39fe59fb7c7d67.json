@@ -1,0 +1,220 @@
+{
+  "original": {
+    "personal_info": {
+      "name": "Joshua Singh",
+      "email": "joshuassingh7@gmail.com",
+      "phone": "",
+      "linkedin": "https://linkedin.com/in/JoshSSingh",
+      "website": "https://jawa-san.github.io/Portfolio/",
+      "github": "https://github.com/Jawa-San",
+      "location": "Orlando, FL"
+    },
+    "summary": "",
+    "skills": [
+      "YAML",
+      "Java",
+      "Low-code Platforms",
+      "Airtable",
+      "Zapier",
+      "SDVI (or similar)",
+      "ETL Pipelines",
+      "Decision Engines",
+      "Process Optimization",
+      "Collaboration",
+      "Innovation",
+      "Industry Alignment"
+    ],
+    "experience": [
+      {
+        "title": "AI Workflow Automation Developer",
+        "company": "L&S Logistic Services",
+        "location": "Orlando, FL",
+        "dates": "Mar. 2024 - Oct. 2024",
+        "bullets": [
+          "Built low-code automation tools to streamline warehouse and delivery workflows, reducing manual data entry and improving overall logistics efficiency.",
+          "Used Python and YAML to develop AI-powered systems that automatically processed shipping data, flagged delivery issues, and routed items based on location and urgency.",
+          "Integrated with tools like Airtable and Zapier to visualize workflows and make operations easier for non-technical staff to manage and modify.",
+          "Worked closely with logistics managers to identify pain points and deploy AI workflows that automated routine tasks such as inventory updates and shipment tracking."
+        ]
+      },
+      {
+        "title": "Research Assistant",
+        "company": "University of Central Florida, Prof. Boloni\u2019s Lab",
+        "location": "Orlando, FL",
+        "dates": "2023",
+        "bullets": [
+          "Built automated workflows to streamline data collection and analysis for research on AI-driven content detection.",
+          "Created low-code tools to help researchers visualize model outputs and manage datasets without needing advanced programming skills.",
+          "Designed decision-making flows that integrated machine learning predictions into study pipelines, improving research efficiency and reproducibility.",
+          "Documented all processes to support collaboration and enable future researchers to reuse and build on existing workflows."
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "name": "AI-Driven Media Workflow Engine",
+        "description": "",
+        "bullets": [
+          "Developed a modular, low-code media workflow builder using YAML to define dynamic job pipelines, enabling non-technical users to configure and execute AI-driven processes.",
+          "Integrated Airtable and OpenAI API to create a decision engine that categorized and routed media content based on metadata, AI tagging, and human-in-the-loop validation.",
+          "Implemented ETL pipelines to ingest, transform, and visualize media supply chain data, supporting robust testing protocols and enabling real-time content operations.",
+          "Collaborated with stakeholders from media organizations to ensure workflows aligned with operational constraints and evolving platform requirements (SDVI-like integration)."
+        ],
+        "technologies": [
+          "YAML",
+          "Python",
+          "Airtable",
+          "OpenAI API",
+          "Node.js"
+        ],
+        "url": "",
+        "dates": ""
+      },
+      {
+        "name": "Website-Integrated Chatbot",
+        "description": "",
+        "bullets": [
+          "Developed a full-stack chatbot application that enhances user interaction through context-aware responses, showcasing skills in API integration, JavaScript, and Node.js.",
+          "Implemented rigorous unit testing and efficient data management, ensuring high-quality software delivery and reliability of the application.",
+          "Engaged in agile development practices, actively contributing to team discussions and adapting to feedback for continuous improvement and customer-centric solutions."
+        ],
+        "technologies": [
+          "JavaScript",
+          "React",
+          "Node.js",
+          "OpenAI API"
+        ],
+        "url": "",
+        "dates": ""
+      }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor\u2019s Degree in Computer Science and Minor in Computational Mathematics and Health Sciences",
+        "school": "University of Central Florida",
+        "location": "",
+        "date": "Graduated May 2024",
+        "gpa": "",
+        "honors": "Received Florida Academic Scholars Bright Futures Scholarship offered to students for 4.0 GPA",
+        "relevant_courses": []
+      }
+    ],
+    "certifications": [],
+    "awards": [],
+    "languages": [],
+    "volunteer": []
+  },
+  "optimized": {
+    "personal_info": {
+      "name": "Joshua Singh",
+      "email": "joshuassingh7@gmail.com",
+      "phone": "",
+      "linkedin": "https://linkedin.com/in/JoshSSingh",
+      "website": "https://jawa-san.github.io/Portfolio/",
+      "github": "https://github.com/Jawa-San",
+      "location": "Orlando, FL"
+    },
+    "summary": "Detail-oriented Web Administrator & IT Support Specialist with a strong background in website administration, server management, and cybersecurity. Expert in optimizing web performance, integrating low-code solutions, and providing technical support to enhance operations. Proven experience in developing automation tools to streamline workflows, ensuring security and scalability of web infrastructures.",
+    "skills": [
+      "WordPress Administration",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Cloud Hosting",
+      "Server Management (AWS, cPanel)",
+      "Cybersecurity Protocols",
+      "ETL Pipelines",
+      "YAML",
+      "Java",
+      "Low-code Platforms",
+      "Airtable",
+      "Zapier",
+      "Decision Engines",
+      "Process Optimization",
+      "Collaboration",
+      "Industry Alignment"
+    ],
+    "experience": [
+      {
+        "title": "AI Workflow Automation Developer",
+        "company": "L&S Logistic Services",
+        "location": "Orlando, FL",
+        "dates": "Mar. 2024 - Oct. 2024",
+        "bullets": [
+          "Designed and built low-code automation tools that streamlined warehouse and delivery workflows, enhancing logistics efficiency while minimizing manual processes.",
+          "Developed AI-powered systems using Python and YAML to automatically process shipping data, effectively troubleshooting and optimizing data routing based on location and urgency.",
+          "Integrated workflow tools such as Airtable and Zapier to simplify operations for non-technical staff, ensuring user-friendly access to web-based solutions.",
+          "Collaborated with logistics managers to identify shortcomings in current processes, deploying AI workflows that automated routine tasks, including inventory and shipment tracking management."
+        ]
+      },
+      {
+        "title": "Research Assistant",
+        "company": "University of Central Florida, Prof. Boloni\u2019s Lab",
+        "location": "Orlando, FL",
+        "dates": "2023",
+        "bullets": [
+          "Developed automated workflows for data collection and analysis in AI-driven content detection, ensuring reproducibility and operational excellence.",
+          "Created low-code tools that empowered researchers to visualize outputs and manage complex datasets without advanced programming knowledge.",
+          "Designed decision-making workflows integrating machine learning predictions, improving operational efficiency in research pipelines.",
+          "Thoroughly documented processes to promote collaboration and knowledge transfer, enabling future researchers to enhance established workflows."
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "name": "AI-Driven Media Workflow Engine",
+        "description": "",
+        "bullets": [
+          "Created a modular, low-code media workflow builder with YAML, facilitating non-technical users in configuring and executing AI-driven processes.",
+          "Developed a decision engine utilizing Airtable and OpenAI API to categorize and route media content based on metadata, AI tagging, and validation protocols.",
+          "Implemented ETL pipelines for data ingestion and transformation, ensuring robust testing frameworks and real-time operations for media content management.",
+          "Engaged closely with stakeholders from media organizations, aligning workflows with operational constraints and fluid platform requirements."
+        ],
+        "technologies": [
+          "YAML",
+          "Python",
+          "Airtable",
+          "OpenAI API",
+          "Node.js"
+        ],
+        "url": "",
+        "dates": ""
+      },
+      {
+        "name": "Website-Integrated Chatbot",
+        "description": "",
+        "bullets": [
+          "Developed a full-stack chatbot application that enhanced user interaction through context-aware responses, showcasing expertise in API integration and front-end technologies (JavaScript, Node.js).",
+          "Implemented comprehensive unit testing and data management strategies, ensuring software deliverables were of the highest quality and reliability.",
+          "Actively participated in agile development practices, engaging in team discussions to adapt and refine solutions for optimized user experiences."
+        ],
+        "technologies": [
+          "JavaScript",
+          "React",
+          "Node.js",
+          "OpenAI API"
+        ],
+        "url": "",
+        "dates": ""
+      }
+    ],
+    "education": [
+      {
+        "degree": "Bachelor\u2019s Degree in Computer Science and Minor in Computational Mathematics and Health Sciences",
+        "school": "University of Central Florida",
+        "location": "",
+        "date": "Graduated May 2024",
+        "gpa": "",
+        "honors": "Received Florida Academic Scholars Bright Futures Scholarship offered to students for 4.0 GPA",
+        "relevant_courses": []
+      }
+    ],
+    "certifications": [],
+    "awards": [],
+    "languages": [],
+    "volunteer": []
+  },
+  "job_description": "Global-5 is a full-service advertising, public relations and marketing firm based in Longwood, FL, with nearly 30 years of experience in transportation, construction, automotive, government, and emerging technologies. We specialize in designing, launching, and maintaining successful public relations and marketing programs that engage target audiences and achieve clients' goals. Our services include public relations, marketing, creative, digital, and strategic consulting.Role DescriptionGlobal-5 is seeking a Web Administrator & IT Support Specialist to manage our web infrastructure, ensuring seamless performance, security, and scalability. This full-time, on-site role focuses on website administration, server management, cybersecurity, and IT support, ensuring all digital assets and systems remain operational and optimized.The ideal candidate will be responsible for maintaining company websites, overseeing hosting environments, managing cloud and on-premise servers, implementing securit",
+  "job_url": "https://www.linkedin.com/jobs/view/4238532961/?alternateChannel=search&refId=nsKkj0bBzaxVu4D2CaWtCw%3D%3D&trackingId=vMwKBvFgBputuq2D2mqK2w%3D%3D",
+  "creativity_level": 1.0
+}

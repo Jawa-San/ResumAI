@@ -1,0 +1,107 @@
+{
+  "personal_info": {
+    "name": "Joshua Singh",
+    "email": "joshuassingh7@gmail.com",
+    "phone": "",
+    "linkedin": "https://linkedin.com/in/JoshSSingh",
+    "website": "https://jawa-san.github.io/Portfolio/",
+    "github": "https://github.com/Jawa-San",
+    "location": "Orlando, FL"
+  },
+  "summary": "",
+  "skills": [
+    "YAML",
+    "Java",
+    "Low-code Platforms",
+    "Airtable",
+    "Zapier",
+    "SDVI (or similar)",
+    "ETL Pipelines",
+    "Decision Engines",
+    "Process Optimization",
+    "Collaboration",
+    "Innovation",
+    "Industry Alignment"
+  ],
+  "experience": [
+    {
+      "title": "AI WORKFLOW AUTOMATION DEVELOPER",
+      "company": "L&S Logistic Services",
+      "location": "Orlando, FL",
+      "dates": "Mar. 2024 - Oct. 2024",
+      "bullets": [
+        "Built low-code automation tools to streamline warehouse and delivery workflows, reducing manual data entry and improving overall logistics efficiency.",
+        "Used Python and YAML to develop AI-powered systems that automatically processed shipping data, flagged delivery issues, and routed items based on location and urgency.",
+        "Integrated with tools like Airtable and Zapier to visualize workflows and make operations easier for non-technical staff to manage and modify.",
+        "Worked closely with logistics managers to identify pain points and deploy AI workflows that automated routine tasks such as inventory updates and shipment tracking."
+      ]
+    },
+    {
+      "title": "RESEARCH ASSISTANT",
+      "company": "University of Central Florida, Prof. Boloni\u2019s Lab",
+      "location": "Orlando, FL",
+      "dates": "2023",
+      "bullets": [
+        "Built automated workflows to streamline data collection and analysis for research on AI-driven content detection.",
+        "Created low-code tools to help researchers visualize model outputs and manage datasets without needing advanced programming skills.",
+        "Designed decision-making flows that integrated machine learning predictions into study pipelines, improving research efficiency and reproducibility.",
+        "Documented all processes to support collaboration and enable future researchers to reuse and build on existing workflows."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "AI-Driven Media Workflow Engine",
+      "description": "",
+      "bullets": [
+        "Developed a modular, low-code media workflow builder using YAML to define dynamic job pipelines, enabling non-technical users to configure and execute AI-driven processes.",
+        "Integrated Airtable and OpenAI API to create a decision engine that categorized and routed media content based on metadata, AI tagging, and human-in-the-loop validation.",
+        "Implemented ETL pipelines to ingest, transform, and visualize media supply chain data, supporting robust testing protocols and enabling real-time content operations.",
+        "Collaborated with stakeholders from media organizations to ensure workflows aligned with operational constraints and evolving platform requirements (SDVI-like integration)."
+      ],
+      "technologies": [
+        "YAML",
+        "Python",
+        "Airtable",
+        "OpenAI API",
+        "Node.js"
+      ],
+      "url": "",
+      "dates": ""
+    },
+    {
+      "name": "Website-Integrated Chatbot",
+      "description": "",
+      "bullets": [
+        "Developed a full-stack chatbot application that enhances user interaction through context-aware responses, showcasing skills in API integration, JavaScript, and Node.js.",
+        "Implemented rigorous unit testing and efficient data management, ensuring high-quality software delivery and reliability of the application.",
+        "Engaged in agile development practices, actively contributing to team discussions and adapting to feedback for continuous improvement and customer-centric solutions."
+      ],
+      "technologies": [
+        "JavaScript",
+        "React",
+        "Node.js",
+        "OpenAI API"
+      ],
+      "url": "",
+      "dates": ""
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor\u2019s Degree in Computer Science and Minor in Computational Mathematics and Health Sciences",
+      "school": "University of Central Florida",
+      "location": "",
+      "date": "May 2024",
+      "gpa": "4.0",
+      "honors": "Florida Academic Scholars Bright Futures Scholarship offered to students for 4.0 GPA",
+      "relevant_courses": []
+    }
+  ],
+  "certifications": [],
+  "awards": [
+    "Florida Academic Scholars Bright Futures Scholarship"
+  ],
+  "languages": [],
+  "volunteer": []
+}

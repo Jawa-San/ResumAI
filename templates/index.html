@@ -1,0 +1,2296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Tweaker</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --dark: #1e293b;
+            --darker: #0f172a;
+            --light: #f1f5f9;
+            --gray: #94a3b8;
+            --gray-dark: #475569;
+            --success: #22c55e;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--darker);
+            color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            flex: 1;
+        }
+        
+        header {
+            background-color: var(--dark);
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-light);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        p.subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 600px;
+            text-align: center;
+        }
+        
+        .main-content {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+        
+        .upload-section {
+            min-width: 300px;
+        }
+        
+        .preview-section {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .job-link-section {
+            min-width: 300px;
+        }
+        
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-width: 300px;
+            gap: 1.5rem;
+        }
+        
+        .upload-area {
+            border: 2px dashed var(--primary);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            background-color: rgba(99, 102, 241, 0.05);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .upload-area:hover, .upload-area.drag-over {
+            background-color: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary-light);
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .upload-icon {
+            margin-bottom: 1.5rem;
+        }
+        
+        .upload-icon svg {
+            width: 64px;
+            height: 64px;
+            fill: var(--primary);
+        }
+        
+        .upload-text {
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+        
+        .divider-text {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .upload-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+        }
+        
+        .upload-btn:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+        
+        input[type="file"] {
+            display: none;
+        }
+        
+        .preview-container {
+            background-color: var(--dark);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+            height: 600px;
+            min-height: 500px;
+            max-height: 700px;
+            position: relative;
+            border: 1px solid var(--gray-dark);
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .preview-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--gray);
+        }
+        
+        .preview-content {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            display: none;
+            background: white;
+            border: none;
+        }
+        
+        .text-preview {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            padding: 1rem;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-family: monospace;
+            color: var(--dark);
+            background: white;
+            display: none;
+            font-size: 14px;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 24px;
+            background-color: var(--primary);
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+        
+        .job-link-textarea {
+            width: 100%;
+            min-height: 60px;
+            max-height: 120px;
+            padding: 1rem;
+            border: 1px solid var(--gray-dark);
+            border-radius: var(--border-radius);
+            resize: vertical;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-y: auto;
+        }
+        
+        .job-link-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+        
+        .helper-text {
+            margin-top: 0.5rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* NEW: Creativity Slider Styles */
+        .creativity-section {
+            background-color: var(--dark);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border: 1px solid var(--gray-dark);
+            margin-top: 0;
+        }
+        
+        .slider-container {
+            margin-top: 1rem;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: var(--gray-dark);
+            outline: none;
+            opacity: 0.8;
+            transition: var(--transition);
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+        
+        .creativity-value {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-light);
+        }
+        
+        .success-message {
+            background-color: rgba(34, 197, 94, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            padding: 2rem 0;
+            margin-top: auto;
+            border-top: 1px solid var(--gray-dark);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-content p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-light);
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+        /* Add custom styling for PDF object */
+        .pdf-container {
+            width: 100%;
+            height: 100%;
+            display: none;
+            background: white;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .pdf-object {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Generate button styles */
+        .generate-section {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .generate-btn {
+            background-color: var(--success);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 1.1rem;
+            width: 100%;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+            filter: brightness(1.1);
+        }
+        
+        .generate-btn:active {
+            transform: translateY(0);
+        }
+        
+        .generate-status {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        .generating {
+            background-color: rgba(99, 102, 241, 0.1);
+            border-left: 4px solid var(--primary);
+            color: var(--light);
+        }
+        
+        .generate-success {
+            background-color: rgba(34, 197, 94, 0.1);
+            border-left: 4px solid var(--success);
+            color: var(--success);
+        }
+        
+        .generate-error {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            color: #ef4444;
+        }
+        
+        /* Download link styles */
+        .download-link {
+            text-decoration: none;
+            display: inline-block;
+            background-color: var(--success);
+            color: white !important;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: var(--transition);
+            margin-top: 1rem;
+        }
+        
+        .download-link:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+        }
+        
+        /* NEW: Comparison Section Styles */
+        .comparison-section {
+            width: 100%;
+            margin-top: 2rem;
+        }
+        
+        .comparison-container {
+            background-color: var(--dark);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border: 1px solid var(--gray-dark);
+        }
+        
+        .comparison-legend {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--gray-dark);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .legend-color {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+        }
+        
+        .legend-color.added {
+            background-color: #22c55e;
+        }
+        
+        .legend-color.modified {
+            background-color: #3b82f6;
+        }
+        
+        .legend-color.removed {
+            background-color: #ef4444;
+        }
+        
+        .comparison-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .comparison-column h3 {
+            color: var(--primary-light);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--gray-dark);
+            font-size: 1.1rem;
+        }
+        
+        .resume-content {
+            max-height: 600px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .resume-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .resume-section-title {
+            font-weight: bold;
+            color: var(--primary-light);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .resume-item {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .resume-item-title {
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+        
+        .resume-item-details {
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+        }
+        
+        .resume-bullet {
+            margin-left: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        /* Diff highlighting */
+        .diff-added {
+            background-color: rgba(34, 197, 94, 0.2);
+            border-left: 3px solid #22c55e;
+        }
+        
+        .diff-modified {
+            background-color: rgba(59, 130, 246, 0.2);
+            border-left: 3px solid #3b82f6;
+        }
+        
+        .diff-removed {
+            background-color: rgba(239, 68, 68, 0.2);
+            border-left: 3px solid #ef4444;
+        }
+        
+        .diff-unchanged {
+            background-color: transparent;
+        }
+        
+        /* Responsive design for comparison */
+        @media (max-width: 1024px) {
+            .comparison-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+        
+        /* NEW: Cover Letter Section Styles */
+        .cover-letter-section {
+            width: 100%;
+            margin-top: 2rem;
+        }
+        
+        .cover-letter-container {
+            background-color: var(--dark);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border: 1px solid var(--gray-dark);
+            position: relative;
+        }
+        
+        .cover-letter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--gray-dark);
+        }
+        
+        .cover-letter-subtitle {
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-style: italic;
+        }
+        
+        .copy-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .copy-btn:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-1px);
+        }
+        
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+        
+        .copy-btn.copied {
+            background-color: var(--success);
+        }
+        
+        .copy-btn:disabled {
+            background-color: var(--gray-dark);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        .copy-btn:disabled:hover {
+            background-color: var(--gray-dark);
+            transform: none;
+        }
+        
+        .cover-letter-content {
+            min-height: 120px;
+            max-height: 300px;
+            overflow-y: auto;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        .cover-letter-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--gray);
+            font-style: italic;
+            width: 80%;
+        }
+        
+        .cover-letter-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 120px;
+            color: var(--gray);
+            font-style: italic;
+        }
+        
+        .cover-letter-text {
+            color: var(--light);
+            white-space: pre-wrap;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        
+        .cover-letter-error {
+            color: #ef4444;
+            text-align: center;
+            padding: 2rem;
+            font-style: italic;
+        }
+        
+        /* Editable content styles */
+        .editable {
+            transition: all 0.2s ease;
+            cursor: text;
+            border-radius: 3px;
+            padding: 2px 4px;
+            margin: -2px -4px;
+        }
+        
+        .editable:hover {
+            background-color: rgba(99, 102, 241, 0.1);
+            border: 1px dashed var(--primary);
+            padding: 1px 3px;
+            margin: -1px -3px;
+        }
+        
+        .editable:focus {
+            outline: 2px solid var(--primary);
+            background-color: rgba(99, 102, 241, 0.05);
+            border: none;
+            padding: 2px 4px;
+            margin: -2px -4px;
+        }
+        
+        .editable-cover-letter {
+            transition: all 0.2s ease;
+            cursor: text;
+            border-radius: 4px;
+            padding: 8px;
+            min-height: 100px;
+            border: 1px solid transparent;
+        }
+        
+        .editable-cover-letter:hover {
+            background-color: rgba(99, 102, 241, 0.1);
+            border: 1px dashed var(--primary);
+        }
+        
+        .editable-cover-letter:focus {
+            outline: 2px solid var(--primary);
+            background-color: rgba(99, 102, 241, 0.05);
+            border: 1px solid var(--primary);
+        }
+        
+        /* Save button styles */
+        .save-changes-btn {
+            background-color: var(--success);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            margin: 1rem 0;
+            display: none;
+        }
+        
+        .save-changes-btn:hover {
+            background-color: #16a34a;
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .save-changes-btn.visible {
+            display: inline-block;
+        }
+        
+        @media (max-width: 768px) {
+            .cover-letter-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+            
+            .copy-btn {
+                justify-content: center;
+            }
+        }
+        
+        /* NEW: Compact Cover Letter Section Styles */
+        .compact-cover-letter-section {
+            background-color: var(--dark);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border: 1px solid var(--gray-dark);
+            margin-top: 1.5rem;
+        }
+        
+        .compact-section-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .compact-section-title::before {
+            content: '';
+            display: inline-block;
+            width: 3px;
+            height: 18px;
+            background-color: var(--primary);
+            margin-right: 8px;
+            border-radius: 2px;
+        }
+        
+        .compact-cover-letter-container {
+            background-color: rgba(15, 23, 42, 0.5);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            border: 1px solid var(--gray-dark);
+            position: relative;
+            min-height: 200px;
+        }
+        
+        .compact-cover-letter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--gray-dark);
+        }
+        
+        .compact-cover-letter-subtitle {
+            font-size: 0.85rem;
+            color: var(--gray);
+            font-style: italic;
+        }
+        
+        .cover-letter-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .compact-copy-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        
+        .compact-copy-btn:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-1px);
+        }
+        
+        .compact-copy-btn:active {
+            transform: translateY(0);
+        }
+        
+        .compact-copy-btn.copied {
+            background-color: var(--success);
+        }
+        
+        .compact-copy-btn:disabled {
+            background-color: var(--gray-dark);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        .compact-copy-btn:disabled:hover {
+            background-color: var(--gray-dark);
+            transform: none;
+        }
+        
+        .compact-cover-letter-content {
+            min-height: 120px;
+            max-height: 200px;
+            overflow-y: auto;
+            line-height: 1.5;
+            font-size: 0.9rem;
+            position: relative;
+        }
+        
+        .compact-cover-letter-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--gray);
+            font-style: italic;
+            width: 90%;
+            font-size: 0.85rem;
+        }
+        
+        @media (max-width: 768px) {
+            .compact-cover-letter-header {
+                flex-direction: column;
+                gap: 0.75rem;
+                align-items: stretch;
+            }
+            
+            .compact-copy-btn {
+                justify-content: center;
+            }
+            
+            .cover-letter-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+        
+        /* NEW: Additional Questions Section Styles */
+        .questions-section {
+            width: 100%;
+            margin-top: 2rem;
+        }
+        
+        .questions-container {
+            background-color: var(--dark);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border: 1px solid var(--gray-dark);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .questions-input-area {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .questions-label {
+            font-size: 1rem;
+            color: var(--light);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        
+        .questions-textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 1rem;
+            border: 1px solid var(--gray-dark);
+            border-radius: var(--border-radius);
+            resize: vertical;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background-color: rgba(15, 23, 42, 0.5);
+            color: var(--light);
+            font-family: inherit;
+            line-height: 1.5;
+        }
+        
+        .questions-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+        
+        .questions-textarea::placeholder {
+            color: var(--gray);
+            font-style: italic;
+        }
+        
+        .generate-answers-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.875rem 1.5rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 1rem;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .generate-answers-btn:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+        
+        .generate-answers-btn:active {
+            transform: translateY(0);
+        }
+        
+        .generate-answers-btn:disabled {
+            background-color: var(--gray-dark);
+            cursor: not-allowed;
+            opacity: 0.6;
+            transform: none;
+        }
+        
+        .questions-status {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        .questions-status.generating {
+            background-color: rgba(99, 102, 241, 0.1);
+            border-left: 4px solid var(--primary);
+            color: var(--light);
+        }
+        
+        .questions-status.success {
+            background-color: rgba(34, 197, 94, 0.1);
+            border-left: 4px solid var(--success);
+            color: var(--success);
+        }
+        
+        .questions-status.error {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            color: #ef4444;
+        }
+        
+        .answers-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .answers-placeholder {
+            text-align: center;
+            color: var(--gray);
+            font-style: italic;
+            padding: 2rem;
+            background-color: rgba(15, 23, 42, 0.3);
+            border-radius: var(--border-radius);
+            border: 1px dashed var(--gray-dark);
+        }
+        
+        .answers-list {
+            display: none;
+        }
+        
+        .answer-item {
+            background-color: rgba(15, 23, 42, 0.5);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .answer-question {
+            font-weight: 600;
+            color: var(--primary-light);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .answer-text {
+            color: var(--light);
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+        
+        .copy-answer-btn {
+            background-color: transparent;
+            color: var(--gray);
+            border: 1px solid var(--gray-dark);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            width: fit-content;
+        }
+        
+        .copy-answer-btn:hover {
+            background-color: var(--gray-dark);
+            color: var(--light);
+        }
+        
+        .copy-answer-btn.copied {
+            background-color: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+        
+        /* Responsive design for questions section */
+        @media (max-width: 1024px) {
+            .questions-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .questions-textarea {
+                min-height: 150px;
+            }
+        }
+        
+        /* NEW: Compact Questions Section Styles for Left Column */
+        .questions-section-compact {
+            background-color: var(--dark);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border: 1px solid var(--gray-dark);
+            margin-top: 0;
+        }
+        
+        .questions-container-compact {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .questions-textarea-compact {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            border: 1px solid var(--gray-dark);
+            border-radius: var(--border-radius);
+            resize: vertical;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            background-color: rgba(15, 23, 42, 0.5);
+            color: var(--light);
+            font-family: inherit;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        
+        .questions-textarea-compact:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+        
+        .questions-textarea-compact::placeholder {
+            color: var(--gray);
+            font-style: italic;
+        }
+        
+        .generate-answers-btn-compact {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .generate-answers-btn-compact:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+        
+        .generate-answers-btn-compact:active {
+            transform: translateY(0);
+        }
+        
+        .generate-answers-btn-compact:disabled {
+            background-color: var(--gray-dark);
+            cursor: not-allowed;
+            opacity: 0.6;
+            transform: none;
+        }
+        
+        .answers-container-compact {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .answers-placeholder-compact {
+            text-align: center;
+            color: var(--gray);
+            font-style: italic;
+            padding: 1.5rem;
+            background-color: rgba(15, 23, 42, 0.3);
+            border-radius: var(--border-radius);
+            border: 1px dashed var(--gray-dark);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Resume Tweaker</h1>
+            <p class="subtitle">Upload your resume and paste job links to find the perfect match for your next career opportunity</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="main-content">
+            <div class="left-column">
+                <section class="upload-section">
+                    <h2 class="section-title">Upload Resume</h2>
+                    <div id="upload-area" class="upload-area">
+                        <div class="upload-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M18 22a2 2 0 0 0 2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12zM13 4l5 5h-5V4zM8 14h8v2H8v-2zm0 4h8v2H8v-2zm0-8h2v2H8v-2z"/>
+                            </svg>
+                        </div>
+                        <p class="upload-text">Drag & drop your resume here</p>
+                        <span class="divider-text">or</span>
+                        <label for="file-input" class="upload-btn">Choose File</label>
+                        <input type="file" id="file-input" name="resume" accept=".pdf,.doc,.docx,.txt">
+                    </div>
+                    <div id="upload-success" class="success-message">
+                        Resume uploaded successfully!
+                    </div>
+                </section>
+                
+                <section class="job-link-section">
+                    <h2 class="section-title">Job Application Link</h2>
+                    <textarea id="job-links" class="job-link-textarea" placeholder="Paste the job posting URL here..."></textarea>
+                    <p class="helper-text">Enter the URL for the specific job you're applying to - your resume will be tailored for this position.</p>
+                </section>
+
+                <!-- NEW: Creativity Slider Section -->
+                <section class="creativity-section">
+                    <h2 class="section-title">Optimization Level</h2>
+                    <div class="slider-container">
+                        <input type="range" min="0" max="100" value="50" class="slider" id="creativity-slider">
+                        <div class="slider-labels">
+                            <span>Conservative</span>
+                            <span>Balanced</span>
+                            <span>Creative</span>
+                        </div>
+                        <div class="creativity-value" id="creativity-value">Balanced (50%)</div>
+                    </div>
+                    <p class="helper-text">Conservative: Minimal changes, keyword addition only. Creative: More dynamic rephrasing and optimization.</p>
+                </section>
+                
+                <!-- NEW: Additional Questions Section -->
+                <section id="questions-section" class="questions-section-compact" style="display: none;">
+                    <h2 class="section-title">Additional Application Questions</h2>
+                    <div class="questions-container-compact">
+                        <label for="questions-textarea" class="questions-label">Paste your application questions here (one per line):</label>
+                        <textarea id="questions-textarea" class="questions-textarea-compact" placeholder="Examples:&#10;Why do you want to work at our company?&#10;What are your salary expectations?&#10;Describe a challenge you overcame&#10;What motivates you in your work?"></textarea>
+                        <button id="generate-answers-btn" class="generate-answers-btn-compact">Generate Answers</button>
+                        <div id="questions-status" class="questions-status"></div>
+                        <div id="answers-container" class="answers-container-compact">
+                            <div id="answers-placeholder" class="answers-placeholder-compact">
+                                <p>Your personalized answers will appear here after generating</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Generate Button Section -->
+                <section id="generate-section" class="generate-section" style="display: none;">
+                    <button id="generate-btn" class="generate-btn">Generate Tailored Resume</button>
+                    <div id="generate-status" class="generate-status"></div>
+                </section>
+            </div>
+            
+            <section class="preview-section">
+                <h2 class="section-title">Resume Preview</h2>
+                <div class="preview-container">
+                    <div id="preview-placeholder" class="preview-placeholder">
+                        <p>Your resume preview will appear here</p>
+                    </div>
+                    <iframe id="preview-content" class="preview-content" frameborder="0"></iframe>
+                </div>
+                
+                <!-- NEW: Compact Cover Letter Section -->
+                <div id="cover-letter-section" class="compact-cover-letter-section">
+                    <h3 class="compact-section-title">Generated Cover Letter</h3>
+                    <div class="compact-cover-letter-container">
+                        <div class="compact-cover-letter-header">
+                            <span class="compact-cover-letter-subtitle">Personalized message for hiring managers</span>
+                            <div class="cover-letter-buttons">
+                                <button id="copy-cover-letter-btn" class="compact-copy-btn" title="Copy to clipboard" disabled>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                    </svg>
+                                    Copy
+                                </button>
+                                <button id="download-cover-letter-btn" class="compact-copy-btn" title="Download as PDF" disabled>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="7,10 12,15 17,10"></polyline>
+                                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                                    </svg>
+                                    PDF
+                                </button>
+                            </div>
+                        </div>
+                        <div id="cover-letter-content" class="compact-cover-letter-content">
+                            <div id="cover-letter-placeholder" class="compact-cover-letter-placeholder">
+                                <p>Your personalized cover letter will appear here after generating an optimized resume</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- NEW: Resume Comparison Section -->
+            <section id="comparison-section" class="comparison-section" style="display: none;">
+                <h2 class="section-title">Resume Comparison</h2>
+                <div class="comparison-container">
+                    <div class="comparison-legend">
+                        <span class="legend-item"><span class="legend-color added"></span>Added</span>
+                        <span class="legend-item"><span class="legend-color modified"></span>Modified</span>
+                        <span class="legend-item"><span class="legend-color removed"></span>Removed</span>
+                    </div>
+                    <div class="comparison-content">
+                        <div class="comparison-column">
+                            <h3>Original Resume</h3>
+                            <div id="original-resume" class="resume-content"></div>
+                        </div>
+                        <div class="comparison-column">
+                            <h3>Optimized Resume</h3>
+                            <div id="optimized-resume" class="resume-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2023 Resume Matcher. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    <script>
+        const uploadArea = document.getElementById('upload-area');
+        const fileInput = document.getElementById('file-input');
+        const uploadSuccess = document.getElementById('upload-success');
+        const previewPlaceholder = document.getElementById('preview-placeholder');
+        const previewContent = document.getElementById('preview-content');
+        const jobLinksTextarea = document.getElementById('job-links');
+        const creativitySlider = document.getElementById('creativity-slider'); // NEW
+        const creativityValue = document.getElementById('creativity-value'); // NEW
+        const generateSection = document.getElementById('generate-section');
+        const generateBtn = document.getElementById('generate-btn');
+        const generateStatus = document.getElementById('generate-status');
+        
+        let resumeUploaded = false;
+        let jobLinkProvided = false;
+        let uploadedFile = null;
+
+        // NEW: Update creativity level display
+        creativitySlider.addEventListener('input', function() {
+            const value = this.value;
+            let label = 'Conservative';
+            if (value >= 75) label = 'Creative';
+            else if (value >= 25) label = 'Balanced';
+            
+            creativityValue.textContent = `${label} (${value}%)`;
+        });
+        
+        // Function to check if both resume and job link are provided
+        function checkRequirements() {
+            jobLinkProvided = jobLinksTextarea.value.trim() !== '';
+            
+            if (resumeUploaded && jobLinkProvided) {
+                generateSection.style.display = 'block';
+            } else {
+                generateSection.style.display = 'none';
+            }
+        }
+        
+        // Check for job link changes
+        jobLinksTextarea.addEventListener('input', checkRequirements);
+        
+        // Handle drag and drop events
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            uploadArea.classList.add('drag-over');
+        }
+        
+        function unhighlight() {
+            uploadArea.classList.remove('drag-over');
+        }
+        
+        // Handle file drop
+        uploadArea.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles(files);
+        }
+        
+        // Handle file selection via button
+        fileInput.addEventListener('change', function() {
+            handleFiles(this.files);
+        });
+        
+        function handleFiles(files) {
+            if (files.length === 0) return;
+            
+            const file = files[0];
+            
+            // Check file type
+            const validTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain'];
+            if (!validTypes.includes(file.type)) {
+                alert('Please upload a PDF, Word document, or text file');
+                return;
+            }
+            
+            // Store the file in our variable
+            uploadedFile = file;
+            
+            // Show success message
+            uploadSuccess.style.display = 'block';
+            
+            // Set resumeUploaded to true and check requirements
+            resumeUploaded = true;
+            checkRequirements();
+            
+            // Preview the file
+            previewFile(file);
+        }
+        
+        function previewFile(file) {
+            // Hide placeholder and reset preview elements
+            previewPlaceholder.style.display = 'none';
+            previewContent.style.display = 'none';
+            
+            // Create text preview element if it doesn't exist
+            let textPreview = document.getElementById('text-preview');
+            if (!textPreview) {
+                textPreview = document.createElement('div');
+                textPreview.id = 'text-preview';
+                textPreview.className = 'text-preview';
+                document.querySelector('.preview-container').appendChild(textPreview);
+            } else {
+                textPreview.style.display = 'none';
+            }
+            
+            // Create PDF container if it doesn't exist
+            let pdfContainer = document.getElementById('pdf-container');
+            if (!pdfContainer) {
+                pdfContainer = document.createElement('div');
+                pdfContainer.id = 'pdf-container';
+                pdfContainer.className = 'pdf-container';
+                document.querySelector('.preview-container').appendChild(pdfContainer);
+            } else {
+                pdfContainer.style.display = 'none';
+                // Clear previous PDF
+                pdfContainer.innerHTML = '';
+            }
+            
+            if (file.type === 'application/pdf') {
+                // Preview PDF using object tag to avoid browser controls
+                const objectURL = URL.createObjectURL(file);
+                
+                // Create a clean object element for PDF
+                const pdfObject = document.createElement('object');
+                pdfObject.className = 'pdf-object';
+                pdfObject.data = objectURL + '#toolbar=0&navpanes=0&scrollbar=0&view=FitH';
+                pdfObject.type = 'application/pdf';
+                
+                // Add to container
+                pdfContainer.appendChild(pdfObject);
+                pdfContainer.style.display = 'block';
+            } else if (file.type === 'text/plain') {
+                // Preview text file
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    textPreview.textContent = e.target.result;
+                    textPreview.style.display = 'block';
+                };
+                reader.readAsText(file);
+            } else {
+                // For Word documents, convert and preview using mammoth.js
+                if (window.FileReader && window.mammoth) {
+                    try {
+                        // Display loading message
+                        previewPlaceholder.style.display = 'block';
+                        previewPlaceholder.innerHTML = '<p>Converting document for preview...</p>';
+                        
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const arrayBuffer = e.target.result;
+                            
+                            // Convert the docx file to html
+                            mammoth.convertToHtml({arrayBuffer: arrayBuffer})
+                                .then(function(result) {
+                                    // Hide placeholder
+                                    previewPlaceholder.style.display = 'none';
+                                    
+                                    // Show the html in the text preview
+                                    textPreview.innerHTML = result.value;
+                                    textPreview.style.display = 'block';
+                                })
+                                .catch(function(error) {
+                                    console.error(error);
+                                    previewPlaceholder.style.display = 'block';
+                                    previewPlaceholder.innerHTML = `
+                                        <p>${file.name}</p>
+                                        <p>Error converting document: ${error.message}</p>
+                                    `;
+                                });
+                        };
+                        reader.readAsArrayBuffer(file);
+                    } catch (error) {
+                        previewPlaceholder.style.display = 'block';
+                        previewPlaceholder.innerHTML = `
+                            <p>${file.name}</p>
+                            <p>Document preview is not available: ${error.message}</p>
+                        `;
+                    }
+                } else {
+                    previewPlaceholder.style.display = 'block';
+                    previewPlaceholder.innerHTML = `
+                        <p>${file.name}</p>
+                        <p>Document preview is not available in this browser</p>
+                        <p>You can still use this document for resume matching.</p>
+                    `;
+                }
+            }
+        }
+        
+        // Click on upload area to trigger file input
+        uploadArea.addEventListener('click', function(e) {
+            // Only open file dialog if the click wasn't on the label/button itself
+            // This prevents double-opening when clicking the button
+            if (!e.target.matches('.upload-btn') && !e.target.closest('.upload-btn')) {
+                fileInput.click();
+            }
+        });
+        
+        // Auto-resize textarea
+        jobLinksTextarea.addEventListener('input', function() {
+            this.style.height = 'auto';
+            const newHeight = Math.min(this.scrollHeight, 120); // Limit to max-height
+            this.style.height = newHeight + 'px';
+        });
+        
+        // Handle generate button click
+        generateBtn.addEventListener('click', function() {
+            // Check if we have a file uploaded
+            if (!resumeUploaded || !jobLinkProvided) {
+                generateStatus.className = 'generate-status generate-error';
+                generateStatus.textContent = 'Please upload a resume and provide a job URL first.';
+                generateStatus.style.display = 'block';
+                return;
+            }
+            
+            // Get the file, job URL, and creativity level
+            const file = uploadedFile;
+            const jobUrl = jobLinksTextarea.value.trim();
+            const creativity = creativitySlider.value / 100; // NEW: Convert to 0-1 scale
+            
+            // Check if file is actually available
+            if (!file) {
+                generateStatus.className = 'generate-status generate-error';
+                generateStatus.textContent = 'Error: No file available. Please upload your resume again.';
+                generateStatus.style.display = 'block';
+                return;
+            }
+            
+            // Create FormData to send to the server
+            const formData = new FormData();
+            formData.append('resume', file);
+            formData.append('job_url', jobUrl);
+            formData.append('creativity', creativity); // NEW: Add creativity level
+            
+            // Display generating status
+            generateStatus.className = 'generate-status generating';
+            generateStatus.textContent = 'Scraping job description and optimizing your resume...';
+            generateStatus.style.display = 'block';
+            
+            // Disable the button while processing
+            generateBtn.disabled = true;
+            generateBtn.style.opacity = '0.7';
+            
+            // Send the data to the server
+            fetch('/api/process-resume', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    generateStatus.className = 'generate-status generate-success';
+                    generateStatus.textContent = 'Resume successfully optimized!';
+                    
+                    // Create download link
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = data.download_url;
+                    downloadLink.textContent = 'Download Optimized Resume';
+                    downloadLink.className = 'download-link';
+                    
+                    // Clear previous children of generateStatus except for the text
+                    generateStatus.innerHTML = generateStatus.textContent;
+                    
+                    // Add download link to status
+                    generateStatus.appendChild(downloadLink);
+                    
+                    // NEW: Show comparison section and populate with data
+                    showComparison(data.original_data, data.optimized_data);
+                    
+                    // NEW: Generate and show cover letter
+                    generateCoverLetter(data.optimized_data, jobUrl);
+                    
+                    // NEW: Show questions section
+                    showQuestionsSection(data.optimized_data, jobUrl);
+                } else {
+                    generateStatus.className = 'generate-status generate-error';
+                    generateStatus.textContent = 'Error: ' + (data.error || 'Unknown error occurred');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                generateStatus.className = 'generate-status generate-error';
+                generateStatus.textContent = 'Error: Could not connect to the server.';
+            })
+            .finally(() => {
+                // Re-enable the button
+                generateBtn.disabled = false;
+                generateBtn.style.opacity = '1';
+            });
+        });
+        
+        // NEW: Function to generate cover letter
+        function generateCoverLetter(optimizedResumeData, jobUrl) {
+            const coverLetterContent = document.getElementById('cover-letter-content');
+            const coverLetterPlaceholder = document.getElementById('cover-letter-placeholder');
+            const copyBtn = document.getElementById('copy-cover-letter-btn');
+            
+            // Hide placeholder and show loading state
+            if (coverLetterPlaceholder) {
+                coverLetterPlaceholder.style.display = 'none';
+            }
+            
+            // Show loading state
+            coverLetterContent.innerHTML = '<div class="cover-letter-loading">Generating personalized cover letter...</div>';
+            
+            // Prepare data for API call
+            const requestData = {
+                resume_data: optimizedResumeData,
+                job_url: jobUrl
+            };
+            
+            // Call the cover letter API
+            fetch('/api/generate-cover-letter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Display the generated cover letter
+                    coverLetterContent.innerHTML = `<div class="cover-letter-text">${data.cover_letter}</div>`;
+                    // Enable copy button
+                    copyBtn.disabled = false;
+                    // Enable download button
+                    document.getElementById('download-cover-letter-btn').disabled = false;
+                } else {
+                    // Display error
+                    coverLetterContent.innerHTML = `<div class="cover-letter-error">Error generating cover letter: ${data.error || 'Unknown error'}</div>`;
+                    // Keep copy button disabled
+                    copyBtn.disabled = true;
+                    // Keep download button disabled
+                    document.getElementById('download-cover-letter-btn').disabled = true;
+                }
+            })
+            .catch(error => {
+                console.error('Cover letter generation error:', error);
+                coverLetterContent.innerHTML = '<div class="cover-letter-error">Error: Could not generate cover letter. Please try again.</div>';
+                // Keep copy button disabled
+                copyBtn.disabled = true;
+                // Keep download button disabled
+                document.getElementById('download-cover-letter-btn').disabled = true;
+            });
+        }
+        
+        // NEW: Copy to clipboard functionality
+        document.getElementById('copy-cover-letter-btn').addEventListener('click', function() {
+            const coverLetterText = document.querySelector('.cover-letter-text');
+            if (!coverLetterText) {
+                return;
+            }
+            
+            // Get the text content
+            const textToCopy = coverLetterText.textContent;
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                // Update button to show success
+                const copyBtn = this;
+                const originalText = copyBtn.innerHTML;
+                
+                copyBtn.classList.add('copied');
+                copyBtn.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20,6 9,17 4,12"></polyline>
+                    </svg>
+                    Copied!
+                `;
+                
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    copyBtn.classList.remove('copied');
+                    copyBtn.innerHTML = originalText;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // Show success message
+                const copyBtn = this;
+                const originalText = copyBtn.innerHTML;
+                copyBtn.textContent = 'Copied!';
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                }, 2000);
+            });
+        });
+        
+        // NEW: Download cover letter as PDF functionality
+        document.getElementById('download-cover-letter-btn').addEventListener('click', function() {
+            const coverLetterText = document.querySelector('.cover-letter-text');
+            if (!coverLetterText || !window.currentResumeData || !window.currentJobUrl) {
+                return;
+            }
+            
+            // Get the text content
+            const coverLetterContent = coverLetterText.textContent;
+            
+            // Prepare data for API call
+            const requestData = {
+                resume_data: window.currentResumeData,
+                job_url: window.currentJobUrl,
+                cover_letter_text: coverLetterContent
+            };
+            
+            // Show downloading status
+            const downloadBtn = this;
+            const originalText = downloadBtn.innerHTML;
+            downloadBtn.disabled = true;
+            downloadBtn.innerHTML = `
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12,6 12,12 16,14"></polyline>
+                </svg>
+                Generating...
+            `;
+            
+            // Call the download API
+            fetch('/api/download-cover-letter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.blob();
+                } else {
+                    throw new Error('Failed to generate cover letter PDF');
+                }
+            })
+            .then(blob => {
+                // Create download link
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'Cover_Letter.pdf';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+                
+                // Show success
+                downloadBtn.innerHTML = `
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20,6 9,17 4,12"></polyline>
+                    </svg>
+                    Downloaded!
+                `;
+                
+                // Reset after 3 seconds
+                setTimeout(() => {
+                    downloadBtn.disabled = false;
+                    downloadBtn.innerHTML = originalText;
+                }, 3000);
+            })
+            .catch(error => {
+                console.error('Cover letter download error:', error);
+                
+                // Show error
+                downloadBtn.innerHTML = `
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                    </svg>
+                    Error
+                `;
+                
+                // Reset after 3 seconds
+                setTimeout(() => {
+                    downloadBtn.disabled = false;
+                    downloadBtn.innerHTML = originalText;
+                }, 3000);
+            });
+        });
+        
+        // NEW: Function to show and populate the comparison section
+        function showComparison(originalData, optimizedData) {
+            const comparisonSection = document.getElementById('comparison-section');
+            const originalContainer = document.getElementById('original-resume');
+            const optimizedContainer = document.getElementById('optimized-resume');
+            
+            // Show the comparison section
+            comparisonSection.style.display = 'block';
+            
+            // Render both resumes
+            originalContainer.innerHTML = renderResumeForComparison(originalData, 'original');
+            optimizedContainer.innerHTML = renderResumeForComparison(optimizedData, 'optimized');
+            
+            // Highlight differences
+            highlightDifferences(originalData, optimizedData);
+            
+            // Scroll to comparison section
+            comparisonSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // NEW: Function to render resume data as HTML for comparison
+        function renderResumeForComparison(data, version) {
+            let html = '';
+            
+            // Personal Info
+            if (data.personal_info && Object.keys(data.personal_info).some(key => data.personal_info[key])) {
+                html += '<div class="resume-section" data-section="personal_info">';
+                html += '<div class="resume-section-title">Contact Information</div>';
+                html += '<div class="resume-item" data-item="personal_info">';
+                if (data.personal_info.name) html += `<div class="resume-item-title">${data.personal_info.name}</div>`;
+                if (data.personal_info.email) html += `<div>${data.personal_info.email}</div>`;
+                if (data.personal_info.phone) html += `<div>${data.personal_info.phone}</div>`;
+                if (data.personal_info.linkedin) html += `<div>${data.personal_info.linkedin}</div>`;
+                if (data.personal_info.website) html += `<div>${data.personal_info.website}</div>`;
+                if (data.personal_info.github) html += `<div>${data.personal_info.github}</div>`;
+                if (data.personal_info.location) html += `<div>${data.personal_info.location}</div>`;
+                html += '</div>';
+                html += '</div>';
+            }
+            
+            // Summary
+            if (data.summary) {
+                html += '<div class="resume-section" data-section="summary">';
+                html += '<div class="resume-section-title">Professional Summary</div>';
+                html += `<div class="resume-item" data-item="summary">${data.summary}</div>`;
+                html += '</div>';
+            }
+            
+            // Skills
+            if (data.skills && data.skills.length > 0) {
+                html += '<div class="resume-section" data-section="skills">';
+                html += '<div class="resume-section-title">Technical Skills</div>';
+                html += `<div class="resume-item" data-item="skills">${data.skills.join(' • ')}</div>`;
+                html += '</div>';
+            }
+            
+            // Experience
+            if (data.experience && data.experience.length > 0) {
+                html += '<div class="resume-section" data-section="experience">';
+                html += '<div class="resume-section-title">Professional Experience</div>';
+                data.experience.forEach((exp, index) => {
+                    html += `<div class="resume-item" data-item="experience-${index}">`;
+                    html += `<div class="resume-item-title">${exp.title || ''}</div>`;
+                    let details = [];
+                    if (exp.company) details.push(exp.company);
+                    if (exp.location) details.push(exp.location);
+                    if (exp.dates) details.push(exp.dates);
+                    if (details.length > 0) {
+                        html += `<div class="resume-item-details">${details.join(' | ')}</div>`;
+                    }
+                    if (exp.bullets && exp.bullets.length > 0) {
+                        exp.bullets.forEach((bullet, bulletIndex) => {
+                            html += `<div class="resume-bullet" data-bullet="experience-${index}-${bulletIndex}">• ${bullet}</div>`;
+                        });
+                    }
+                    html += '</div>';
+                });
+                html += '</div>';
+            }
+            
+            // Projects
+            if (data.projects && data.projects.length > 0) {
+                html += '<div class="resume-section" data-section="projects">';
+                html += '<div class="resume-section-title">Projects</div>';
+                data.projects.forEach((project, index) => {
+                    html += `<div class="resume-item" data-item="project-${index}">`;
+                    html += `<div class="resume-item-title">${project.name || ''}</div>`;
+                    let details = [];
+                    if (project.dates) details.push(project.dates);
+                    if (project.url) details.push(project.url);
+                    if (details.length > 0) {
+                        html += `<div class="resume-item-details">${details.join(' | ')}</div>`;
+                    }
+                    if (project.description) {
+                        html += `<div class="resume-bullet" data-description="project-${index}">• ${project.description}</div>`;
+                    }
+                    if (project.bullets && project.bullets.length > 0) {
+                        project.bullets.forEach((bullet, bulletIndex) => {
+                            html += `<div class="resume-bullet" data-bullet="project-${index}-${bulletIndex}">• ${bullet}</div>`;
+                        });
+                    }
+                    if (project.technologies && project.technologies.length > 0) {
+                        html += `<div class="resume-bullet" data-tech="project-${index}">Technologies: ${project.technologies.join(', ')}</div>`;
+                    }
+                    html += '</div>';
+                });
+                html += '</div>';
+            }
+            
+            // Education
+            if (data.education && data.education.length > 0) {
+                html += '<div class="resume-section" data-section="education">';
+                html += '<div class="resume-section-title">Education</div>';
+                data.education.forEach((edu, index) => {
+                    html += `<div class="resume-item" data-item="education-${index}">`;
+                    html += `<div class="resume-item-title">${edu.degree || ''}</div>`;
+                    let details = [];
+                    if (edu.school) details.push(edu.school);
+                    if (edu.location) details.push(edu.location);
+                    if (edu.date) details.push(edu.date);
+                    if (details.length > 0) {
+                        html += `<div class="resume-item-details">${details.join(' | ')}</div>`;
+                    }
+                    if (edu.gpa) html += `<div class="resume-bullet">GPA: ${edu.gpa}</div>`;
+                    if (edu.honors) html += `<div class="resume-bullet">Honors: ${edu.honors}</div>`;
+                    if (edu.relevant_courses && edu.relevant_courses.length > 0) {
+                        html += `<div class="resume-bullet">Relevant Courses: ${edu.relevant_courses.join(', ')}</div>`;
+                    }
+                    html += '</div>';
+                });
+                html += '</div>';
+            }
+            
+            // Other sections (certifications, awards, languages, volunteer)
+            ['certifications', 'awards', 'languages'].forEach(section => {
+                if (data[section] && data[section].length > 0) {
+                    html += `<div class="resume-section" data-section="${section}">`;
+                    html += `<div class="resume-section-title">${section.charAt(0).toUpperCase() + section.slice(1)}</div>`;
+                    html += `<div class="resume-item" data-item="${section}">${data[section].join(' • ')}</div>`;
+                    html += '</div>';
+                }
+            });
+            
+            if (data.volunteer && data.volunteer.length > 0) {
+                html += '<div class="resume-section" data-section="volunteer">';
+                html += '<div class="resume-section-title">Volunteer Experience</div>';
+                data.volunteer.forEach((vol, index) => {
+                    html += `<div class="resume-item" data-item="volunteer-${index}">`;
+                    html += `<div class="resume-item-title">${vol.role || ''}</div>`;
+                    let details = [];
+                    if (vol.organization) details.push(vol.organization);
+                    if (vol.dates) details.push(vol.dates);
+                    if (details.length > 0) {
+                        html += `<div class="resume-item-details">${details.join(' | ')}</div>`;
+                    }
+                    if (vol.description) {
+                        html += `<div class="resume-bullet">• ${vol.description}</div>`;
+                    }
+                    html += '</div>';
+                });
+                html += '</div>';
+            }
+            
+            return html;
+        }
+        
+        // NEW: Function to highlight differences between original and optimized resumes
+        function highlightDifferences(originalData, optimizedData) {
+            // Compare and highlight summary
+            if (originalData.summary !== optimizedData.summary) {
+                highlightElement('[data-item="summary"]', 'modified');
+            }
+            
+            // Compare skills
+            if (JSON.stringify(originalData.skills) !== JSON.stringify(optimizedData.skills)) {
+                highlightElement('[data-item="skills"]', 'modified');
+            }
+            
+            // Compare experience bullets
+            if (originalData.experience && optimizedData.experience) {
+                originalData.experience.forEach((origExp, expIndex) => {
+                    const optExp = optimizedData.experience[expIndex];
+                    if (optExp) {
+                        // Compare bullets
+                        if (origExp.bullets && optExp.bullets) {
+                            origExp.bullets.forEach((origBullet, bulletIndex) => {
+                                const optBullet = optExp.bullets[bulletIndex];
+                                if (optBullet && origBullet !== optBullet) {
+                                    highlightElement(`[data-bullet="experience-${expIndex}-${bulletIndex}"]`, 'modified');
+                                }
+                            });
+                            
+                            // Check for new bullets
+                            if (optExp.bullets.length > origExp.bullets.length) {
+                                for (let i = origExp.bullets.length; i < optExp.bullets.length; i++) {
+                                    highlightElement(`[data-bullet="experience-${expIndex}-${i}"]`, 'added', 'optimized');
+                                }
+                            }
+                            
+                            // Check for removed bullets
+                            if (origExp.bullets.length > optExp.bullets.length) {
+                                for (let i = optExp.bullets.length; i < origExp.bullets.length; i++) {
+                                    highlightElement(`[data-bullet="experience-${expIndex}-${i}"]`, 'removed', 'original');
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Compare project descriptions and bullets
+            if (originalData.projects && optimizedData.projects) {
+                originalData.projects.forEach((origProj, projIndex) => {
+                    const optProj = optimizedData.projects[projIndex];
+                    if (optProj) {
+                        // Compare descriptions
+                        if (origProj.description !== optProj.description) {
+                            highlightElement(`[data-description="project-${projIndex}"]`, 'modified');
+                        }
+                        
+                        // Compare bullets
+                        if (origProj.bullets && optProj.bullets) {
+                            origProj.bullets.forEach((origBullet, bulletIndex) => {
+                                const optBullet = optProj.bullets[bulletIndex];
+                                if (optBullet && origBullet !== optBullet) {
+                                    highlightElement(`[data-bullet="project-${projIndex}-${bulletIndex}"]`, 'modified');
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        }
+        
+        // NEW: Helper function to highlight specific elements
+        function highlightElement(selector, diffType, version = 'both') {
+            if (version === 'both' || version === 'original') {
+                const originalElement = document.querySelector('#original-resume ' + selector);
+                if (originalElement) {
+                    originalElement.classList.add(`diff-${diffType}`);
+                }
+            }
+            
+            if (version === 'both' || version === 'optimized') {
+                const optimizedElement = document.querySelector('#optimized-resume ' + selector);
+                if (optimizedElement) {
+                    optimizedElement.classList.add(`diff-${diffType}`);
+                }
+            }
+        }
+        
+        // NEW: Function to show questions section
+        function showQuestionsSection(optimizedResumeData, jobUrl) {
+            const questionsSection = document.getElementById('questions-section');
+            questionsSection.style.display = 'block';
+            
+            // Store optimized resume data for generating answers
+            window.currentResumeData = optimizedResumeData;
+            window.currentJobUrl = jobUrl;
+            
+            // Add event listener for generate answers button
+            const generateAnswersBtn = document.getElementById('generate-answers-btn');
+            generateAnswersBtn.addEventListener('click', handleGenerateAnswers);
+        }
+        
+        // NEW: Function to handle generating answers
+        function handleGenerateAnswers() {
+            const questionsTextarea = document.getElementById('questions-textarea');
+            const questionsStatus = document.getElementById('questions-status');
+            const generateAnswersBtn = document.getElementById('generate-answers-btn');
+            
+            const questions = questionsTextarea.value.trim();
+            
+            if (!questions) {
+                questionsStatus.className = 'questions-status error';
+                questionsStatus.textContent = 'Please enter at least one question.';
+                questionsStatus.style.display = 'block';
+                return;
+            }
+            
+            // Check if we have resume data
+            if (!window.currentResumeData || !window.currentJobUrl) {
+                questionsStatus.className = 'questions-status error';
+                questionsStatus.textContent = 'Error: Optimized resume data not available. Please generate an optimized resume first.';
+                questionsStatus.style.display = 'block';
+                return;
+            }
+            
+            // Show generating status
+            questionsStatus.className = 'questions-status generating';
+            questionsStatus.textContent = 'Generating personalized answers based on your optimized resume...';
+            questionsStatus.style.display = 'block';
+            
+            // Disable button
+            generateAnswersBtn.disabled = true;
+            
+            // Prepare data for API call
+            const requestData = {
+                resume_data: window.currentResumeData,
+                job_url: window.currentJobUrl,
+                questions: questions
+            };
+            
+            // Call the questions API
+            fetch('/api/answer-questions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    questionsStatus.className = 'questions-status success';
+                    questionsStatus.textContent = 'Answers generated successfully!';
+                    
+                    // Display the answers
+                    displayAnswers(questions, data.answers);
+                } else {
+                    questionsStatus.className = 'questions-status error';
+                    questionsStatus.textContent = 'Error: ' + (data.error || 'Failed to generate answers');
+                }
+            })
+            .catch(error => {
+                console.error('Questions API error:', error);
+                questionsStatus.className = 'questions-status error';
+                questionsStatus.textContent = 'Error: Could not connect to the server.';
+            })
+            .finally(() => {
+                // Re-enable button
+                generateAnswersBtn.disabled = false;
+            });
+        }
+        
+        // NEW: Function to display answers
+        function displayAnswers(questionsText, answers) {
+            const answersContainer = document.getElementById('answers-container');
+            const answersPlaceholder = document.getElementById('answers-placeholder');
+            
+            // Parse questions
+            const questionsList = questionsText.split('\n').filter(q => q.trim());
+            
+            // Hide placeholder
+            answersPlaceholder.style.display = 'none';
+            
+            // Create or get answers list
+            let answersList = document.getElementById('answers-list');
+            if (!answersList) {
+                answersList = document.createElement('div');
+                answersList.id = 'answers-list';
+                answersList.className = 'answers-list';
+                answersContainer.appendChild(answersList);
+            }
+            
+            // Clear previous answers
+            answersList.innerHTML = '';
+            
+            // Create answer items
+            questionsList.forEach((question, index) => {
+                const answer = answers[index] || 'No answer generated for this question.';
+                
+                const answerItem = document.createElement('div');
+                answerItem.className = 'answer-item';
+                
+                answerItem.innerHTML = `
+                    <div class="answer-question">${question}</div>
+                    <div class="answer-text">${answer}</div>
+                    <button class="copy-answer-btn" data-answer="${answer}">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy
+                    </button>
+                `;
+                
+                answersList.appendChild(answerItem);
+            });
+            
+            // Show answers list
+            answersList.style.display = 'block';
+            
+            // Add copy functionality to buttons
+            answersList.querySelectorAll('.copy-answer-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const answerText = this.dataset.answer;
+                    
+                    navigator.clipboard.writeText(answerText).then(() => {
+                        // Update button to show success
+                        const originalContent = this.innerHTML;
+                        
+                        this.classList.add('copied');
+                        this.innerHTML = `
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20,6 9,17 4,12"></polyline>
+                            </svg>
+                            Copied!
+                        `;
+                        
+                        // Reset after 2 seconds
+                        setTimeout(() => {
+                            this.classList.remove('copied');
+                            this.innerHTML = originalContent;
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy text: ', err);
+                        
+                        // Fallback for older browsers
+                        const textArea = document.createElement('textarea');
+                        textArea.value = answerText;
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        
+                        // Show success message
+                        const originalContent = this.innerHTML;
+                        this.textContent = 'Copied!';
+                        setTimeout(() => {
+                            this.innerHTML = originalContent;
+                        }, 2000);
+                    });
+                });
+            });
+            
+            // Scroll to answers
+            answersList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>
